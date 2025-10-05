@@ -1,6 +1,5 @@
 #pragma once
 #include <JuceHeader.h>
-#include <filesystem>
 #include <regex>
 #include "BinaryData.h"
 #include "Editor.h"
@@ -12,9 +11,9 @@ public:
     auto run() -> void override {
         auto audioPath = this->processor.audioPath;
         auto destFolder = this->processor.destFolder;
-        std::filesystem::path dir = destFolder.toStdString();
-        std::filesystem::path file = "vocals.wav";
-        auto vocalPath = String{dir / file};
+        File vocalFolder{destFolder};
+        File vocalFile = vocalFolder.getChildFile("vocals.wav");
+        auto vocalPath = vocalFile.getFullPathName();
         bool skipVocalExtraction = this->processor.skipVocalExtraction;
         bool keepVocalFile = this->processor.keepVocalFile;
         auto droppedFileBytes = this->processor.droppedFileBytes;
