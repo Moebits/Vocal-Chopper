@@ -32,8 +32,8 @@ jobs:
         if: runner.os == 'Windows'
         shell: powershell
         run: |
-          Register-PackageSource -provider NuGet -name nugetRepository -location https://www.nuget.org/api/v2
-          Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository
+          Register-PackageSource -ProviderName NuGet -Name nugetRepository -Location https://www.nuget.org/api/v2
+          Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository -Force -AcceptLicense
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
