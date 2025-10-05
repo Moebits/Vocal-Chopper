@@ -30,13 +30,10 @@ jobs:
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
-        env:
-          JUCE_WEBVIEW2_PACKAGE_LOCATION: deps/Microsoft.Web.WebView2.1.0.1901.177
         run: |
           choco install cmake --installargs "ADD_CMAKE_TO_PATH=1" --yes
-          choco install nuget.commandline --yes
-          choco install microsoft-edge-webview2 --yes
-          nuget install Microsoft.Web.WebView2 -Version 1.0.1901.177 -OutputDirectory deps
+          powershell -Command "Register-PackageSource -provider NuGet -name nugetRepository -location https://www.nuget.org/api/v2"
+          powershell -Command "Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository"
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
