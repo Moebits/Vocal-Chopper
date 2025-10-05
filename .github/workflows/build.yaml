@@ -32,8 +32,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           choco install cmake --installargs "ADD_CMAKE_TO_PATH=1" --yes
-          powershell -Command "Register-PackageSource -provider NuGet -name nugetRepository -location https://www.nuget.org/api/v2"
-          powershell -Command "Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository"
+          choco install webview2-runtime
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
