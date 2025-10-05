@@ -33,6 +33,7 @@
         "@rsbuild/plugin-sass": "^1.4.0",
         "@types/react": "^19.2.0",
         "@types/react-dom": "^19.2.0",
+        "del-cli": "^7.0.0",
         "sass": "^1.93.2"
     }
 }
