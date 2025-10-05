@@ -1,5 +1,7 @@
 # Vocal Chopper
 
+<img src="assets/readme.png" height="600">
+
 Vocal Chopper is a plugin that aids in making vocal chops. It can take any audio clip 
 that contains human singing, extracts out only the vocals, and then chops it along 
 regions of interest. 

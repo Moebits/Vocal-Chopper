@@ -7,6 +7,3 @@ release
 .DS_Store
 VocalChopper.spec
 python/VocalChopper
-python/chopper.build
-python/chopper.dist
-python/chopper.onefile-build
