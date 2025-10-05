@@ -40,7 +40,7 @@ public:
     auto showFileInFolder(const Array<var>& args, 
         WebBrowserComponent::NativeFunctionCompletion completion) -> void;
 
-    auto fileDropped(const juce::var& eventData) -> void;
+    auto fileDropped(const var& eventData) -> void;
     
     auto deleteThread() -> void;
 

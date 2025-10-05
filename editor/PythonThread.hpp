@@ -20,12 +20,12 @@ public:
         auto droppedFileBytes = this->processor.droppedFileBytes;
         bool isTempPath = false;
     
-        juce::File tempScript = juce::File::getSpecialLocation(juce::File::tempDirectory).getChildFile("chopper.py");
+        File tempScript = File::getSpecialLocation(File::tempDirectory).getChildFile("chopper.py");
         tempScript.replaceWithData(BinaryData::chopper_py, BinaryData::chopper_pySize);
 
         if (audioPath.contains("[dropped file]") && !droppedFileBytes.isEmpty()) {
             auto name = audioPath.fromFirstOccurrenceOf("]", false, false).trim();
-            juce::File tempAudioFile = juce::File::getSpecialLocation(juce::File::tempDirectory).getChildFile(name);
+            File tempAudioFile = File::getSpecialLocation(File::tempDirectory).getChildFile(name);
             tempAudioFile.replaceWithData(droppedFileBytes.getData(), droppedFileBytes.getSize());
             audioPath = tempAudioFile.getFullPathName();
             isTempPath = true;
@@ -35,7 +35,7 @@ public:
         #if JUCE_MAC
             pythonPath = "/usr/local/bin/python3";
         #else
-            pythonPath = "python";
+            pythonPath = "python3";
         #endif
 
         char buffer[128];
@@ -99,13 +99,13 @@ public:
             this->editor.webview.emitEventIfBrowserIsVisible(Identifier{"progress"}, 100);
         }
 
-        juce::File audioFile{audioPath};
+        File audioFile{audioPath};
         auto outputBaseName = audioFile.getFileNameWithoutExtension();
-        auto outputDir = juce::File{destFolder}.getChildFile(outputBaseName + " chops");
+        auto outputDir = File{destFolder}.getChildFile(outputBaseName + " chops");
         if (outputDir.isDirectory()) outputDir.startAsProcess();
 
         if (!skipVocalExtraction) {
-            juce::File vocalFile{vocalPath};
+            File vocalFile{vocalPath};
             if (keepVocalFile && vocalFile.existsAsFile()) {
                 auto newDest = outputDir.getChildFile(vocalFile.getFileName());
                 vocalFile.moveFileTo(newDest);
@@ -115,7 +115,7 @@ public:
         }
 
         if (isTempPath) {
-            juce::File tempFile{audioPath};
+            File tempFile{audioPath};
             if (tempFile.existsAsFile()) tempFile.deleteFile();
         }
     

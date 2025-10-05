@@ -59,7 +59,7 @@ auto Editor::webviewOptions() -> WebBrowserComponent::Options {
     .withNativeFunction("showFileInFolder", [this](auto args, auto completion){ 
         return this->showFileInFolder(args, completion);
     })
-    .withEventListener("file-dropped", [this](const juce::var& eventData) {
+    .withEventListener("file-dropped", [this](const var& eventData) {
         return this->fileDropped(eventData);
     });
 }
@@ -219,10 +219,13 @@ auto Editor::showFileInFolder(const Array<var>& args,
     #elif JUCE_WINDOWS
         auto cmd = "explorer /select,\"" + file.getFullPathName() + "\"";
         system(cmd.toRawUTF8());
+    #else
+        auto parentFolder = file.getParentDirectory();
+        parentFolder.startAsProcess();
     #endif
 }
 
-auto Editor::fileDropped(const juce::var& eventData) -> void {
+auto Editor::fileDropped(const var& eventData) -> void {
     auto* obj = eventData.getDynamicObject();
     auto name = obj->getProperty("name");
     auto data = obj->getProperty("data");
