@@ -20,8 +20,8 @@ public:
     inline auto isMidiEffect() const -> bool override { return false; }
     inline auto getTailLengthSeconds() const -> double override { return 0.0; }
 
-    auto getNumPrograms() -> int override { return 1; }
-    auto getCurrentProgram() -> int override { return 1; }
+    auto getNumPrograms() -> int override { return 0; }
+    auto getCurrentProgram() -> int override { return 0; }
     auto setCurrentProgram([[maybe_unused]] int index) -> void override {}
     auto getProgramName([[maybe_unused]] int index) -> const String override { return ""; }
     auto changeProgramName([[maybe_unused]] int index, [[maybe_unused]] const String& newName) -> void override {}
