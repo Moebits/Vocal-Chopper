@@ -23,6 +23,13 @@ pip3 install crepe demucs librosa soundfile tensorflow onnxruntime --compile --f
 
 Download from the [releases](https://github.com/Moebits/Vocal-Chopper/releases) tab and rescan the plugins in your DAW.
 
+### MacOS
+
+On MacOS you need to remove the unsigned app check.
+```
+xattr -d com.apple.quarantine "/Library/Audio/Plug-Ins/VST3/Vocal Chopper.vst3"
+```
+
 ### Building
 
 Release build - `npm install` and `npm run build`. 
