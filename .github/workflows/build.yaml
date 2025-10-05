@@ -1,4 +1,4 @@
-name: Build Vocal Chopper
+name: Build Plugin
 
 on:
   push:
@@ -30,8 +30,11 @@ jobs:
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
+        env:
+          JUCE_WEBVIEW2_PACKAGE_LOCATION: deps/Microsoft.Web.WebView2.1.0.1901.177
         run: |
           choco install cmake --installargs "ADD_CMAKE_TO_PATH=1" --yes
+          choco install nuget.commandline --yes
           choco install microsoft-edge-webview2 --yes
           nuget install Microsoft.Web.WebView2 -Version 1.0.1901.177 -OutputDirectory deps
 
@@ -51,7 +54,6 @@ jobs:
             libfreetype6-dev libfontconfig1-dev libgl1-mesa-dev \
             libcurl4-openssl-dev libgtk-3-dev libwebkit2gtk-4.1-dev
             
-
       - name: Install npm packages
         run: npm install
 
