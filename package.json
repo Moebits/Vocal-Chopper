@@ -1,0 +1,38 @@
+{
+    "name": "vocal-chopper",
+    "version": "0.0.1",
+    "description": "A simple plugin to chop vocals",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "rsbuild dev",
+        "build": "npm run clean && npm run embed-binary && npm run cmake",
+        "embed-binary": "rsbuild build && (node -e \"process.exit(process.platform === 'win32' ? 0 : 1)\" && embed-binary.bat || ./embed-binary.sh)",
+        "cmake": "cmake -B build -DCMAKE_BUILD_TYPE=Release -DWEBVIEW_DEV_MODE=0 && cmake --build build --config Release",
+        "clean": "del-cli ./dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Moebits/Vocal-Chopper"
+    },
+    "author": "Moebits",
+    "license": "CC BY-NC 4.0",
+    "overrides": {
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.8",
+        "juce-framework-frontend-mirror": "^8.0.8-rc.1",
+        "react": "^19.2.0",
+        "react-bootstrap": "^2.10.10",
+        "react-dom": "^19.2.0"
+    },
+    "devDependencies": {
+        "@rsbuild/core": "^1.5.13",
+        "@rsbuild/plugin-react": "^1.4.1",
+        "@rsbuild/plugin-sass": "^1.4.0",
+        "@types/react": "^19.2.0",
+        "@types/react-dom": "^19.2.0",
+        "sass": "^1.93.2"
+    }
+}
