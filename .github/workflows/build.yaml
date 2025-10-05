@@ -66,8 +66,9 @@ jobs:
         shell: bash
         run: |
           RELEASE_DIR="build/${{env.PLUGIN_NAME}}_artefacts/Release"
-          find "$RELEASE_DIR" -type f -name "*_SharedCode.a" -print -delete || true
-          find "$RELEASE_DIR" -type f -name "*_SharedCode.lib" -print -delete || true
+          find "$RELEASE_DIR" -type f -name "*.a" -print -delete || true
+          find "$RELEASE_DIR" -type f -name "*.lib" -print -delete || true
+          find "$RELEASE_DIR" -type f -name "*.exp" -print -delete || true
 
       - name: Flatten plugin folders
         shell: bash
